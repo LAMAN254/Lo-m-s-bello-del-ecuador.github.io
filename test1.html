@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Nivel 1: Introducción a las Finanzas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/test.css">
+</head>
+<body>
+    <header>
+        <h1>Test Nivel 1: Introducción a las Finanzas</h1>
+    </header>
+    <div class="container">
+        <div class="navigation-buttons top-nav">
+            <a href="../levels/level1.html" class="nav-button back-button">Volver al Nivel 1</a>
+            <a href="../index.html" class="nav-button back-button">Volver al Inicio</a>
+        </div>
+
+        <div class="test-intro">
+            <p>Responde las siguientes preguntas para completar este nivel:</p>
+        </div>
+
+        <form id="testForm" class="test-form">
+            <div class="question">
+                <p class="question-number">1. ¿Qué son las finanzas personales?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="correct">
+                        <span>La gestión de ingresos y gastos personales.</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="wrong">
+                        <span>La economía global.</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-number">2. ¿Cuál es la regla 50-30-20?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="correct">
+                        <span>50% necesidades, 30% gustos, 20% ahorro/inversión.</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="wrong">
+                        <span>50% ahorro, 30% gustos, 20% necesidades.</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-number">3. ¿Qué es un fondo de emergencia?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="correct">
+                        <span>Un ahorro para cubrir 3-6 meses de gastos básicos.</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="wrong">
+                        <span>Un préstamo para emergencias.</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-number">4. ¿Por qué es importante ahorrar desde temprano?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="correct">
+                        <span>Porque el interés compuesto multiplica el dinero con el tiempo.</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="wrong">
+                        <span>Porque es obligatorio por ley.</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-number">5. ¿Qué herramienta digital puede ayudarte a controlar tus gastos?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q5" value="correct">
+                        <span>Apps como Moni o Fintonic.</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="wrong">
+                        <span>Redes sociales.</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="resultMessage" class="result-message"></div>
+
+            <div class="navigation-buttons bottom-nav">
+                <button type="button" class="submit-button" onclick="submitTest()">Enviar Test</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Función para mezclar las preguntas
+        function shuffleQuestions() {
+            const form = document.getElementById('testForm');
+            const questions = Array.from(form.getElementsByClassName('question'));
+            const shuffled = questions.sort(() => Math.random() - 0.5); // Mezcla aleatoria
+            shuffled.forEach(question => form.appendChild(question)); // Reorganiza las preguntas
+
+            // Actualiza los números de las preguntas
+            const questionNumbers = form.getElementsByClassName('question-number');
+            Array.from(questionNumbers).forEach((element, index) => {
+                element.textContent = `${index + 1}. ${element.textContent.split('. ')[1]}`;
+            });
+        }
+
+        // Llama a la función para mezclar las preguntas al cargar la página
+        window.onload = shuffleQuestions;
+
+        // Función para enviar el test
+        function submitTest() {
+            const answers = document.querySelectorAll('input[type="radio"]:checked');
+            if (answers.length < 5) {
+                alert('Por favor, responde todas las preguntas.');
+                return;
+            }
+
+            let score = 0;
+            answers.forEach(answer => {
+                if (answer.value === 'correct') {
+                    score++;
+                }
+            });
+
+            const resultMessage = document.getElementById('resultMessage');
+            resultMessage.className = `result-message ${score === 5 ? 'success' : 'error'}`;
+            
+            if (score === 5) {
+                resultMessage.textContent = '¡Felicidades! Has aprobado el Nivel 1.';
+                unlockNextLevel(2);
+                setTimeout(() => {
+                    window.location.href = "../levels/level2.html";
+                }, 2000);
+            } else {
+                resultMessage.textContent = `No has aprobado. Tu puntuación es ${score}/5. Revisa el contenido y vuelve a intentarlo.`;
+            }
+            
+            // Scroll to result message
+            resultMessage.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Función para desbloquear el siguiente nivel
+        function unlockNextLevel(level) {
+            localStorage.setItem(`level${level}`, 'unlocked'); // Guarda el estado del nivel como desbloqueado
+        }
+    </script>
+</body>
+</html>

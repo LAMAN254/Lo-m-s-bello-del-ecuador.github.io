@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivel 1: Conocimientos Básicos de Finanzas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --level1-primary: #00B4DB;
+            --level1-secondary: #0083B0;
+            --level1-accent: #FFD700;
+            --level1-success: #4CAF50;
+            --money-green: #2ECC71;
+            --bg-gradient: linear-gradient(135deg, #F5F7FA 0%, #E4EfF5 100%);
+            --card-shadow: 0 8px 32px rgba(0, 180, 219, 0.1);
+        }
+
+        body {
+            background: var(--bg-gradient);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #2C3E50;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(135deg, var(--level1-primary), var(--level1-secondary));
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 3rem;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '💰';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            right: -20px;
+            top: -20px;
+            transform: rotate(15deg);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container Styling */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styling */
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--level1-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Headings */
+        h2 {
+            color: var(--level1-primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--level1-accent);
+            transition: width 0.3s ease;
+        }
+
+        .section:hover h2::after {
+            width: 100px;
+        }
+
+        h3 {
+            color: var(--level1-secondary);
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 0.8rem 0;
+            margin-bottom: 0.5rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        li::before {
+            content: '💎';
+            position: absolute;
+            left: 0;
+            opacity: 0.8;
+        }
+
+        /* Example Box */
+        .example {
+            background: #F8FDFE;
+            border: 2px dashed var(--level1-primary);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .example h4 {
+            color: var(--level1-primary);
+            margin-top: 0;
+        }
+
+        /* Quote */
+        .quote {
+            background: linear-gradient(135deg, var(--level1-primary), var(--level1-secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Challenge Section */
+        .challenge {
+            background: #FFF9E6;
+            border: 2px solid var(--level1-accent);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .challenge h2 {
+            color: #333;
+        }
+
+        .challenge li::before {
+            content: '🎯';
+        }
+
+        /* Navigation Buttons */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .button {
+            background: var(--level1-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: var(--level1-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 180, 219, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem;
+                border-radius: 0 0 20px 20px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nivel 1: Conocimientos Básicos de Finanzas</h1>
+    </header>
+    <div class="container">
+        <div class="section">
+            <h2>¡Hola, jóvenes!</h2>
+            <p>¿Alguna vez han sentido que el dinero se les escapa de las manos sin saber en qué lo gastaron? ¿O han soñado con ahorrar para un viaje, un concierto o ese dispositivo tecnológico que tanto desean, pero no saben por dónde empezar? Las finanzas personales no tienen que ser complicadas ni aburridas. De hecho, aprender a manejar el dinero desde temprano puede ser la clave para vivir con más libertad, menos estrés y alcanzar tus metas.</p>
+        </div>
+
+        <div class="section">
+            <h2>¿Por qué importan las finanzas?</h2>
+            <p>En la adolescencia y juventud, cada decisión financiera —desde cómo gastas tu mesada o salario de un trabajo parcial hasta cómo evitas deudas innecesarias— sienta las bases para tu futuro.</p>
+            <h3>Dominar conceptos básicos te permitirá:</h3>
+            <ul>
+                <li>Evitar deudas: Como los peligrosos intereses de las tarjetas de crédito</li>
+                <li>Lograr tus sueños: Viajar, estudiar o emprender</li>
+                <li>Crear seguridad: Un colchón para emergencias o imprevistos</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>3 Pilares Básicos que Todos Pueden Dominar</h2>
+            
+            <h3>1. Presupuesto: Controla tu dinero</h3>
+            <div class="example">
+                <h4>La regla 50-30-20 es un buen inicio:</h4>
+                <ul>
+                    <li>50% para necesidades: Comida, transporte, servicios básicos</li>
+                    <li>30% para gustos: Salidas, ropa, suscripciones</li>
+                    <li>20% para ahorro/inversión: ¡Tu futuro yo te lo agradecerá!</li>
+                </ul>
+                <p>Usa apps como Moni o Fintonic para trackear gastos automáticamente.</p>
+            </div>
+
+            <h3>2. Ahorro: Pequeños pasos, grandes resultados</h3>
+            <ul>
+                <li>Empieza con lo que tengas: Ahorrar €5 al día se convierte en €1,800 al año</li>
+                <li>Fondo de emergencia: Apunta a 3-6 meses de gastos básicos</li>
+                <li>Interés compuesto: Invertir temprano, incluso poco, multiplica tu dinero con el tiempo</li>
+            </ul>
+
+            <h3>3. Inversión: No necesitas ser experto</h3>
+            <p>Plataformas como Robo-advisors (Ej: Indexa Capital) o apps de microinversión (Burst) permiten empezar con pocos euros. ¡Infórmate y elige opciones de bajo riesgo!</p>
+        </div>
+
+        <div class="section">
+            <h2>Herramientas Digitales a Tu Favor</h2>
+            <p>La tecnología es tu aliada:</p>
+            <ul>
+                <li>Bancos móviles (Revolut, N26): Controla tu dinero en tiempo real</li>
+                <li>Apps de inversión (Trade Republic, MyInvestor): Accede a bolsa con mínimos</li>
+                <li>Educación gratuita: Canales como VisualEconomik o podcasts financieros simplifican conceptos</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Errores que Evitar</h2>
+            <ul>
+                <li>Gastar más de lo que ganas: Las tarjetas de crédito no son dinero extra</li>
+                <li>Ignorar las pequeñas compras: Un café diario puede costarte €900 al año</li>
+                <li>Postergar el ahorro: ¡El momento ideal para empezar es ahora!</li>
+            </ul>
+        </div>
+
+        <div class="quote">
+            <p>"El mejor momento para plantar un árbol fue hace 20 años. El segundo mejor momento es ahora."</p>
+            <small>— Proverbio chino adaptado a tus finanzas</small>
+        </div>
+
+        <div class="challenge">
+            <h2>Reto Inicial:</h2>
+            <ul>
+                <li>Descarga una app de control de gastos</li>
+                <li>Registra todos tus gastos durante una semana</li>
+                <li>Identifica tres gastos que podrías reducir</li>
+            </ul>
+        </div>
+
+        <div class="navigation-buttons">
+            <a href="../index.html"><button class="button">Volver al Índice</button></a>
+            <a href="../tests/test1.html"><button class="button">Ir al Test</button></a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Nivel 3: Ahorro e Inversiones</title>
+    <link rel="stylesheet" href="../css/test.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Test Nivel 3: Ahorro e Inversiones</h1>
+    </header>
+    <div class="test-container">
+        <div class="navigation-buttons top-nav">
+            <a href="../levels/level3.html" class="nav-button back-button">Volver al Nivel 3</a>
+            <a href="../index.html" class="nav-button back-button">Volver al Inicio</a>
+        </div>
+
+        <div class="test-intro">
+            <p>Responde las siguientes preguntas para completar este nivel:</p>
+        </div>
+
+        <form id="testForm" class="test-form">
+            <div class="question">
+                <p class="question-number">1. ¿Cuántos meses de gastos básicos debería cubrir un fondo de emergencia?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="correct">
+                        <span>3-6 meses</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="wrong">
+                        <span>1 mes</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-number">2. ¿Qué es el interés compuesto?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="correct">
+                        <span>Los intereses que se generan sobre el capital más los intereses anteriores</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="wrong">
+                        <span>Los intereses que se pagan por un préstamo</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-number">3. ¿Qué es un Robo-Advisor?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="correct">
+                        <span>Una plataforma que invierte automáticamente tu dinero en fondos diversificados</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="wrong">
+                        <span>Un robot que te da consejos financieros personales</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-number">4. ¿Qué relación existe entre riesgo y rentabilidad en inversiones?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="correct">
+                        <span>A mayor rentabilidad esperada, mayor riesgo</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="wrong">
+                        <span>No existe relación entre riesgo y rentabilidad</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-number">5. ¿Por qué es importante tener un fondo de emergencia antes de invertir?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q5" value="correct">
+                        <span>Para evitar vender inversiones en pérdidas si necesitas el dinero</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="wrong">
+                        <span>No es importante, puedes invertir todo tu dinero</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="resultMessage" class="result-message"></div>
+
+            <div class="navigation-buttons bottom-nav">
+                <button type="button" class="submit-button" onclick="submitTest()">Enviar Test</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function submitTest() {
+            const answers = document.querySelectorAll('input[type="radio"]:checked');
+            if (answers.length < 5) {
+                alert('Por favor, responde todas las preguntas.');
+                return;
+            }
+
+            let score = 0;
+            answers.forEach(answer => {
+                if (answer.value === 'correct') {
+                    score++;
+                }
+            });
+
+            const resultMessage = document.getElementById('resultMessage');
+            resultMessage.className = `result-message ${score === 5 ? 'success' : 'error'}`;
+            resultMessage.textContent = score === 5 
+                ? '¡Felicitaciones! Has completado el Nivel 3 exitosamente.' 
+                : `Has obtenido ${score}/5. Revisa el material y vuelve a intentarlo.`;
+
+            if (score === 5) {
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>

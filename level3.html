@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivel 3: Ahorro e Inversiones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --level3-primary: #2DD4BF;
+            --level3-secondary: #0EA5E9;
+            --level3-accent: #10B981;
+            --level3-warning: #F59E0B;
+            --level3-profit: #22C55E;
+            --level3-loss: #EF4444;
+            --bg-gradient: linear-gradient(135deg, #ECFEFF 0%, #F0FDFA 100%);
+            --card-shadow: 0 8px 32px rgba(45, 212, 191, 0.1);
+        }
+
+        body {
+            background: var(--bg-gradient);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #334155;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Design */
+        header {
+            background: linear-gradient(135deg, var(--level3-primary), var(--level3-secondary));
+            padding: 3rem 2rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            border-radius: 0 0 30px 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        header::before {
+            content: '📈';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            right: -20px;
+            top: -20px;
+            transform: rotate(15deg);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        /* Container and Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(45, 212, 191, 0.1);
+            position: relative;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--level3-primary), var(--level3-secondary));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(45, 212, 191, 0.15);
+        }
+
+        /* Typography */
+        h2 {
+            color: var(--level3-primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h2::before {
+            content: '💰';
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            color: var(--level3-secondary);
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            border-left: 4px solid var(--level3-accent);
+            padding-left: 1rem;
+        }
+
+        h4 {
+            color: var(--level3-accent);
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 0.5rem 0 0.5rem 2rem;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '📌';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Investment Tips */
+        .tip {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(45, 212, 191, 0.05));
+            border-left: 4px solid var(--level3-accent);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        /* Challenge Section */
+        .challenge {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+            border: 2px solid var(--level3-warning);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .challenge h2::before {
+            content: '🎯';
+        }
+
+        /* Quote Box */
+        .quote {
+            background: linear-gradient(135deg, var(--level3-primary), var(--level3-secondary));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Navigation */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .button {
+            background: var(--level3-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background: var(--level3-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 212, 191, 0.3);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nivel 3: Ahorro e Inversión para Jóvenes</h1>
+    </header>
+    <div class="container">
+        <div class="section">
+            <h2>¡Llegó el momento de hacer crecer tu dinero!</h2>
+            <p>Si ya dominas el presupuesto y controlas tus gastos, el siguiente paso es convertirte en un maestro del ahorro inteligente y explorar el mundo de las inversiones. Aquí aprenderás cómo hacer que tu dinero trabaje para ti, incluso si empiezas con poco. 🌱💸</p>
+        </div>
+
+        <div class="section">
+            <h2>1. Ahorro: La Base de Todo</h2>
+            <p>El ahorro no es solo guardar lo que "sobra", sino priorizar tu futuro.</p>
+
+            <h3>a) Tipos de Ahorro</h3>
+            <h4>Emergencias:</h4>
+            <p>Objetivo: 3-6 meses de gastos básicos.</p>
+            <p>¿Dónde guardarlo? Cuenta de ahorro con liquidez inmediata (ej: Revolut, N26).</p>
+
+            <h4>Metas a Corto Plazo (1-3 años):</h4>
+            <p>Ejemplo: Viaje, computadora, curso.</p>
+            <p>Opciones: Depósitos a plazo fijo (mejor interés que una cuenta normal).</p>
+
+            <h4>Metas a Largo Plazo (+5 años):</h4>
+            <p>Ejemplo: Entrada para una casa, jubilación.</p>
+            <p>Opciones: Inversiones de bajo riesgo (fondos indexados, ETFs).</p>
+
+            <h3>b) Estrategias para Ahorrar Más (Sin Dolor)</h3>
+            <p>Automatiza: Programa transferencias automáticas a tu cuenta de ahorro el día que recibes dinero.</p>
+            <p>Retos de Ahorro:</p>
+            <ul>
+                <li>Reto 52 semanas: Empieza ahorrando €1 la semana 1, €2 la semana 2... ¡En un año tendrás €1,378!</li>
+                <li>Reto del "Dinero Invisible": Ahorra los €5 o €10 que te dan en efectivo y no gastes.</li>
+            </ul>
+            <p>Aprovecha la Tecnología:</p>
+            <p>Apps como Twig (vende cosas que no usas) o Plum (ahorra automáticamente según tus gastos).</p>
+        </div>
+
+        <div class="section">
+            <h2>2. Inversión: Tu Dinero Genera Dinero</h2>
+            <p>Invertir no es solo para ricos. Con poco dinero y paciencia, puedes crear riqueza gracias al interés compuesto.</p>
+
+            <h3>a) Conceptos Clave</h3>
+            <h4>Interés Compuesto:</h4>
+            <p>Ejemplo: Si inviertes €1,000 al 7% anual, en 10 años tendrás €1,967 (¡sin hacer nada!).</p>
+            <p>Regla del 72: Divide 72 entre la tasa de rendimiento para saber cuánto tardará tu dinero en duplicarse (ej: 72/7% ≈ 10 años).</p>
+            <p>Riesgo vs. Rentabilidad: A mayor rentabilidad esperada, mayor riesgo (acciones > bonos > cuentas de ahorro).</p>
+
+            <h3>b) Opciones de Inversión para Principiantes</h3>
+            <h4>Robo-Advisors (Inversión Automatizada):</h4>
+            <p>Ejemplos: Indexa Capital (España), Finanbest.</p>
+            <p>Ventaja: Invierte por ti en fondos diversificados con pocos euros.</p>
+            <h4>ETF o Fondos Indexados:</h4>
+            <p>Replican índices como el S&P 500 (promedio histórico: ~10% anual).</p>
+            <p>Plataformas: MyInvestor, Degiro.</p>
+            <h4>Microinversión:</h4>
+            <p>Invierte el "cambio" de tus compras con apps como Burst o Twisto.</p>
+            <h4>Crowdlending:</h4>
+            <p>Presta dinero a empresas o proyectos (ej: Mintos).</p>
+            <p>Riesgo: Medio-Alto (investiga antes).</p>
+        </div>
+
+        <div class="section">
+            <h2>3. Errores que Debes Evitar</h2>
+            <p>No tener un fondo de emergencia: Invertir sin este colchón es peligroso (podrías vender tus inversiones en pérdidas).</p>
+            <p>Perseguir ganancias rápidas: Las criptomonedas o acciones volátiles son para expertos. Empieza con lo seguro.</p>
+            <p>Ignorar las comisiones: Algunas plataformas cobran altas tarifas. Compara antes de elegir.</p>
+        </div>
+
+        <div class="section">
+            <h2>4. Herramientas para Empezar a Invertir</h2>
+            <h3>Educación Gratuita:</h3>
+            <p>Libros: El Inversor Inteligente (Benjamin Graham), Padre Rico, Padre Pobre.</p>
+            <p>YouTube: Andrei Jikh, Luisito Comunica (video "Cómo invertir desde cero").</p>
+
+            <h3>Apps Todo en Uno:</h3>
+            <p>Trade Republic: Invierte en acciones, ETFs y cripto con €1.</p>
+            <p>Binance: Para cripto (solo si entiendes el riesgo).</p>
+        </div>
+
+        <div class="section">
+            <h2>5. Pasos para Tu Primera Inversión</h2>
+            <p>Define tu perfil de riesgo: ¿Eres conservador, moderado o arriesgado?</p>
+            <p>Empieza pequeño: €50-€100 en un ETF diversificado (ej: Vanguard S&P 500).</p>
+            <p>Mantén la calma: El mercado sube y baja. No vendas por pánico.</p>
+            <p>Reinvierte tus ganancias: Acelera el efecto del interés compuesto.</p>
+        </div>
+
+        <div class="challenge">
+            <h2>Reto del Mes:</h2>
+            <ul>
+                <li>Abre una cuenta en un robo-advisor o plataforma de inversión.</li>
+                <li>Invierte €20 en un ETF o fondo indexado.</li>
+                <li>Lee un artículo o ve un video sobre educación financiera.</li>
+            </ul>
+        </div>
+
+        <div class="quote">
+            <p>"El dinero crece en los árboles de la paciencia."</p>
+            <small>— Proverbio japonés adaptado a tus finanzas.</small>
+        </div>
+
+        <div class="navigation-buttons">
+            <a href="../index.html"><button class="button">Volver al Índice</button></a>
+            <a href="../tests/test3.html"><button class="button">Ir al Test</button></a>
+        </div>
+    </div>
+</body>
+</html>

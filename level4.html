@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzas Tycoon 2D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-color: #004d40;
+            --accent-color: #4caf50;
+            --background-color: #f4f7fa;
+            --text-color: #333;
+            --modal-background: #ffffff;
+            --modal-border: #b0bec5;
+            --notification-background: #333;
+            --notification-text: #fff;
+            --button-background: #00796b;
+            --button-hover: #004d40;
+            --progress-background: #cfd8dc;
+            --progress-bar: #4caf50;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container, #level-selection {
+            background-color: var(--modal-background);
+            border: 1px solid var(--modal-border);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            width: 450px;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #game-container {
+            display: none;
+        }
+
+        h1, h3 {
+            margin: 0;
+            padding: 0;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        #business-list {
+            margin-top: 20px;
+        }
+
+        .business {
+            margin-bottom: 10px;
+        }
+
+        #progress-bar {
+            width: 100%;
+            background-color: var(--progress-background);
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #progress {
+            width: 0;
+            height: 20px;
+            background-color: var(--progress-bar);
+            transition: width 0.5s ease;
+        }
+
+        .investment-option, .shop-item, .job-option, .level-option {
+            margin: 5px 0;
+            padding: 10px;
+            background-color: var(--button-background);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .investment-option:hover, .shop-item:hover, .job-option:hover, .level-option:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Modal styles */
+        #ticket-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--modal-background);
+            border: 2px solid var(--modal-border);
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            z-index: 1000;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        #ticket-modal h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        #ticket-modal button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: var(--button-background);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #ticket-modal button:hover {
+            background-color: var(--button-hover);
+        }
+
+        /* Notification styles */
+        #notification {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--notification-background);
+            color: var(--notification-text);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #game-container, #level-selection {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="level-selection">
+        <h1>Selecciona el Nivel de Dificultad</h1>
+        <button class="level-option" onclick="selectLevel('easy')"><i class="fas fa-leaf"></i> Easy</button>
+        <button class="level-option" onclick="selectLevel('normal')"><i class="fas fa-balance-scale"></i> Normal</button>
+        <button class="level-option" onclick="selectLevel('nightmare')"><i class="fas fa-skull"></i> Nightmare</button>
+    </div>
+
+    <div id="game-container">
+        <h1>Finanzas Tycoon 2D</h1>
+        <p>Capital: $<span id="capital">1000</span></p>
+        <p>Semana: <span id="week">1</span></p>
+        <div id="job-options">
+            <h3>Trabajos</h3>
+            <button class="job-option" onclick="workJob('partTime')"><i class="fas fa-clock"></i> Trabajo a Medio Tiempo $200/semana</button>
+            <button class="job-option" onclick="workJob('fullTime')"><i class="fas fa-briefcase"></i> Trabajo a Tiempo Completo $500/semana</button>
+        </div>
+        <div id="investment-options">
+            <select id="company-select">
+                <option value="TechCorp,0.15">TechCorp (15% riesgo)</option>
+                <option value="GreenEnergy,0.2">GreenEnergy (20% riesgo)</option>
+                <option value="RealEstateInc,0.25">RealEstateInc (25% riesgo)</option>
+                <option value="HealthPlus,0.18">HealthPlus (18% riesgo)</option>
+                <option value="Bonos,0.03">Bonos (3% riesgo)</option>
+                <option value="Criptomonedas,0.5">Criptomonedas (50% riesgo)</option>
+                <option value="RealEstate,0.2">Inmobiliaria (20% riesgo)</option>
+            </select>
+            <input type="number" id="investment-amount" placeholder="Monto a invertir" min="0">
+            <button class="investment-option" onclick="investInSelectedCompany()"><i class="fas fa-chart-line"></i> Invertir en Empresa Seleccionada</button>
+            <button class="investment-option" onclick="investInCourse('basic')"><i class="fas fa-book"></i> Curso Básico $500</button>
+            <button class="investment-option" onclick="investInCourse('advanced')"><i class="fas fa-graduation-cap"></i> Curso Avanzado $800</button>
+            <button class="investment-option" onclick="openSavingsAccount()"><i class="fas fa-piggy-bank"></i> Abrir Cuenta de Ahorros</button>
+            <button class="investment-option" onclick="stockMarketChallenge()"><i class="fas fa-exchange-alt"></i> Desafío del Mercado de Valores</button>
+        </div>
+        <div id="shop">
+            <h3>Tienda</h3>
+            <button class="shop-item" onclick="buyItem('boost')"><i class="fas fa-rocket"></i> Mejora de Inversión $300</button>
+            <button class="shop-item" onclick="buyItem('riskReduction')"><i class="fas fa-shield-alt"></i> Reducción de Riesgo $400</button>
+            <button class="shop-item" onclick="buyItem('extraLife')"><i class="fas fa-heart"></i> Vida Extra $500</button>
+        </div>
+        <div id="business-list"></div>
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+    </div>
+
+    <!-- Ticket Modal -->
+    <div id="ticket-modal">
+        <h2>Resumen Semanal</h2>
+        <p id="ticket-content"></p>
+        <button onclick="closeTicket()">Cerrar</button>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification"></div>
+
+    <script>
+        let capital = 1000;
+        let week = 1;
+        const goal = 5000;
+        let educationLevel = 1;
+        let savings = 0;
+        let investmentBoost = 0;
+        let riskReduction = 0;
+        let extraLife = 0;
+        let weeklyIncome = 0;
+        let stockDividends = 0;
+        let taxRate = 0.15; // Default tax rate
+        const savingsInterestRate = 0.02; // 2% interest rate
+
+        const financialTips = [
+            "Diversifica tus inversiones para reducir riesgos.",
+            "Mantén un fondo de emergencia para imprevistos.",
+            "Reinvierta sus ganancias para maximizar el crecimiento.",
+            "Investiga antes de invertir en nuevas oportunidades."
+        ];
+
+        const quizQuestions = [
+            {
+                question: "¿Qué es el interés compuesto?",
+                options: ["Interés sobre el capital inicial", "Interés sobre el capital y los intereses acumulados"],
+                answer: 1
+            },
+            {
+                question: "¿Qué significa diversificar?",
+                options: ["Invertir en un solo activo", "Invertir en diferentes tipos de activos"],
+                answer: 1
+            },
+            {
+                question: "¿Qué es un fondo de emergencia?",
+                options: ["Dinero para gastos inesperados", "Dinero para inversiones de alto riesgo"],
+                answer: 0
+            },
+            {
+                question: "¿Qué es la inflación?",
+                options: ["Aumento del poder adquisitivo", "Aumento general de precios"],
+                answer: 1
+            },
+            {
+                question: "¿Qué es una deducción fiscal?",
+                options: ["Reducción de impuestos", "Aumento de impuestos"],
+                answer: 0
+            }
+        ];
+
+        function selectLevel(level) {
+            if (level === 'easy') {
+                taxRate = 0.10; // Lower tax rate
+                investmentBoost = 0.05; // Higher investment boost
+            } else if (level === 'normal') {
+                taxRate = 0.15; // Default tax rate
+                investmentBoost = 0.03; // Default investment boost
+            } else if (level === 'nightmare') {
+                taxRate = 0.20; // Higher tax rate
+                investmentBoost = 0.01; // Lower investment boost
+            }
+            document.getElementById('level-selection').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
+        }
+
+        function updateCapital(amount) {
+            capital += amount;
+            document.getElementById('capital').textContent = capital.toFixed(2);
+            updateProgress();
+        }
+
+        function workJob(type) {
+            if (type === 'partTime') {
+                weeklyIncome = 200;
+            } else if (type === 'fullTime') {
+                weeklyIncome = 500;
+            }
+            showNotification(`Has elegido un trabajo con un ingreso de $${weeklyIncome.toFixed(2)} por semana.`);
+        }
+
+        function investInSelectedCompany() {
+            const select = document.getElementById('company-select');
+            const [companyName, risk] = select.value.split(',');
+            const amountInput = document.getElementById('investment-amount').value;
+            const amount = isNaN(parseFloat(amountInput)) ? 0 : parseFloat(amountInput);
+
+            if (isNaN(amount) || amount <= 0) {
+                showNotification("Por favor, introduce un monto válido para invertir.");
+                return;
+            }
+
+            investInCompany(companyName, amount, parseFloat(risk));
+        }
+
+        function investInCompany(companyName, amount, risk) {
+            if (capital < amount) {
+                showNotification("No tienes suficiente capital para esta inversión.");
+                return;
+            }
+            updateCapital(-amount);
+            const adjustedRisk = Math.max(0, risk - riskReduction);
+            const profit = Math.random() < adjustedRisk ? -amount : amount * (1 + (risk + investmentBoost) * educationLevel);
+            if (companyName === "TechCorp" || companyName === "GreenEnergy") {
+                stockDividends += amount * 0.01; // 1% dividend
+            }
+            setTimeout(() => {
+                showNotification(`Resultado de la inversión en ${companyName}: ${profit >= 0 ? 'Ganancia' : 'Pérdida'} de $${Math.abs(profit).toFixed(2)}`);
+                updateCapital(profit);
+                showFinancialTip();
+                askQuizQuestion();
+                triggerRandomEvent();
+                nextWeek();
+            }, 1000);
+        }
+
+        function investInCourse(type) {
+            let cost;
+            let improvement;
+            if (type === 'basic') {
+                cost = 500;
+                improvement = 0.1;
+            } else if (type === 'advanced') {
+                cost = 800;
+                improvement = 0.2;
+            }
+
+            if (capital < cost) {
+                showNotification("No tienes suficiente capital para este curso.");
+                return;
+            }
+            updateCapital(-cost);
+            educationLevel += improvement;
+            showNotification(`Has completado un curso ${type}. Tus habilidades financieras han mejorado.`);
+            nextWeek();
+        }
+
+        function openSavingsAccount() {
+            const depositInput = prompt("¿Cuánto deseas depositar en tu cuenta de ahorros?");
+            const deposit = isNaN(parseFloat(depositInput)) ? 0 : parseFloat(depositInput);
+            if (isNaN(deposit) || deposit <= 0 || deposit > capital) {
+                showNotification("Por favor, introduce un monto válido para depositar.");
+                return;
+            }
+            savings += deposit;
+            updateCapital(-deposit);
+            showNotification(`Has depositado $${deposit.toFixed(2)} en tu cuenta de ahorros.`);
+        }
+
+        function stockMarketChallenge() {
+            const decision = prompt("El mercado está volátil. ¿Deseas comprar (1) o vender (2) acciones?");
+            if (decision === "1") {
+                showNotification("Compraste acciones. Espera a ver cómo se comporta el mercado.");
+                // Simulate market behavior
+                setTimeout(() => {
+                    const marketChange = Math.random() < 0.5 ? -0.1 : 0.1;
+                    const changeAmount = capital * marketChange;
+                    updateCapital(changeAmount);
+                    showNotification(`El mercado ha cambiado. Tu capital ha ${marketChange > 0 ? 'aumentado' : 'disminuido'} en $${Math.abs(changeAmount).toFixed(2)}.`);
+                }, 1000);
+            } else if (decision === "2") {
+                showNotification("Vendiste acciones. Espera a ver cómo se comporta el mercado.");
+                // Simulate market behavior
+                setTimeout(() => {
+                    const marketChange = Math.random() < 0.5 ? -0.1 : 0.1;
+                    const changeAmount = capital * marketChange;
+                    updateCapital(changeAmount);
+                    showNotification(`El mercado ha cambiado. Tu capital ha ${marketChange > 0 ? 'aumentado' : 'disminuido'} en $${Math.abs(changeAmount).toFixed(2)}.`);
+                }, 1000);
+            } else {
+                showNotification("Decisión no válida.");
+            }
+        }
+
+        function buyItem(item) {
+            let cost;
+            if (item === 'boost') {
+                cost = 300;
+                investmentBoost += 0.05;
+                showNotification("Has comprado una Mejora de Inversión. Tus retornos aumentarán ligeramente.");
+            } else if (item === 'riskReduction') {
+                cost = 400;
+                riskReduction += 0.05;
+                showNotification("Has comprado una Reducción de Riesgo. Tus inversiones serán más seguras.");
+                updateCompanyRisks();
+            } else if (item === 'extraLife') {
+                cost = 500;
+                extraLife += 1;
+                showNotification("Has comprado una Vida Extra. Puedes sobrevivir a una pérdida catastrófica.");
+            }
+
+            if (capital < cost) {
+                showNotification("No tienes suficiente capital para esta compra.");
+                return;
+            }
+            updateCapital(-cost);
+        }
+
+        function updateCompanyRisks() {
+            const select = document.getElementById('company-select');
+            const options = select.options;
+            for (let i = 0; i < options.length; i++) {
+                const [name, originalRisk] = options[i].value.split(',');
+                const adjustedRisk = Math.max(0, parseFloat(originalRisk) - riskReduction);
+                options[i].textContent = `${name} (${(adjustedRisk * 100).toFixed(0)}% riesgo)`;
+                options[i].value = `${name},${adjustedRisk}`;
+            }
+        }
+
+        function nextWeek() {
+            week++;
+            const income = weeklyIncome;
+            const taxes = income * taxRate;
+            const savingsInterest = savings * savingsInterestRate;
+            updateCapital(income - taxes + savingsInterest + stockDividends);
+            showTicket(income, savingsInterest, stockDividends, taxes);
+            stockDividends = 0; // Reset dividends for the next week
+            document.getElementById('week').textContent = week;
+        }
+
+        function showTicket(income, savingsInterest, stockDividends, taxes) {
+            const ticketContent = `
+                - Ingreso del trabajo: $${income.toFixed(2)}<br>
+                - Intereses de ahorros: $${savingsInterest.toFixed(2)}<br>
+                - Dividendos: $${stockDividends.toFixed(2)}<br>
+                - Impuestos pagados: $${taxes.toFixed(2)}
+            `;
+            document.getElementById('ticket-content').innerHTML = ticketContent;
+            document.getElementById('ticket-modal').style.display = 'block';
+        }
+
+        function closeTicket() {
+            document.getElementById('ticket-modal').style.display = 'none';
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            let start;
+            function hideNotification(timestamp) {
+                if (!start) start = timestamp;
+                const elapsed = timestamp - start;
+                if (elapsed < 20000) {
+                    requestAnimationFrame(hideNotification);
+                } else {
+                    notification.style.display = 'none';
+                }
+            }
+            requestAnimationFrame(hideNotification);
+        }
+
+        function updateProgress() {
+            const progress = Math.min((capital / goal) * 100, 100);
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function showFinancialTip() {
+            const tip = financialTips[Math.floor(Math.random() * financialTips.length)];
+            showNotification(`Consejo Financiero: ${tip}`);
+        }
+
+        function askQuizQuestion() {
+            const question = quizQuestions[Math.floor(Math.random() * quizQuestions.length)];
+            const userAnswer = prompt(`${question.question}\n1. ${question.options[0]}\n2. ${question.options[1]}`);
+            if (parseInt(userAnswer) - 1 === question.answer) {
+                showNotification("¡Correcto! Recibes un bono de $50.");
+                updateCapital(50);
+            } else {
+                showNotification("Incorrecto. Intenta aprender más sobre este tema.");
+            }
+        }
+
+        function triggerRandomEvent() {
+            const events = [
+                { description: "Crisis Económica: Todas las inversiones pierden un 20% de valor.", impact: -0.2 },
+                { description: "Bonanza: Las inversiones en empresas tecnológicas aumentan un 30%.", impact: 0.3 },
+                { description: "Nueva regulación prohíbe criptomonedas, reduciendo su valor.", impact: -0.5 }
+            ];
+            const event = events[Math.floor(Math.random() * events.length)];
+            showNotification(`Evento Aleatorio: ${event.description}`);
+            // Apply event impact to investments
+        }
+    </script>
+</body>
+</html>
