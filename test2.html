@@ -3,149 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Title</title>
+    <title>Test Nivel 2: Conceptos Básicos de Finanzas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
     <style>
-            /* General Styles */
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f9;
-                margin: 0;
-                padding: 0;
-            }
-            
-            header {
-                background-color: #4CAF50;
-                color: white;
-                text-align: center;
-                padding: 1rem;
-            }
-            
-            .container {
-                max-width: 800px;
-                margin: 2rem auto;
-                padding: 1rem;
-                background-color: white;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            .navigation-buttons {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 1rem;
-            }
-            
-            .nav-button {
-                text-decoration: none;
-                color: #4CAF50;
-                border: 1px solid #4CAF50;
-                padding: 0.5rem 1rem;
-                border-radius: 5px;
-                transition: background-color 0.3s, color 0.3s;
-            }
-            
-            .nav-button:hover {
-                background-color: #4CAF50;
-                color: white;
-            }
-            
-            .test-intro {
-                margin-bottom: 1rem;
-            }
-            
-            .question {
-                margin-bottom: 1.5rem;
-            }
-            
-            .question-number {
-                font-weight: bold;
-                margin-bottom: 0.5rem;
-            }
-            
-            .options {
-                margin-left: 1rem;
-            }
-            
-            .option {
-                display: block;
-                margin-bottom: 0.5rem;
-            }
-            
-            .submit-button {
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                padding: 0.75rem 1.5rem;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-            
-            .submit-button:hover {
-                background-color: #45a049;
-            }
-            
-            .result-message {
-                text-align: center;
-                font-size: 1.2rem;
-                margin-top: 1rem;
-            }
-            
-            .result-message.success {
-                color: #4CAF50;
-            }
-            
-            .result-message.error {
-                color: #f44336;    
-            }
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .test-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .nav-button {
+            text-decoration: none;
+            color: #007BFF;
+            border: 1px solid #007BFF;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .test-intro {
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .options {
+            margin-left: 1rem;
+        }
+
+        .option {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .submit-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        .result-message {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .result-message.success {
+            color: #28a745;
+        }
+
+        .result-message.error {
+            color: #dc3545;
+        }
     </style>
+</head>
 <body>
     <header>
-        <h1>Test Nivel 2: Presupuesto y Control de Gastos</h1>
+        <h1>Test Nivel 2: Conceptos Básicos de Finanzas</h1>
     </header>
-    <div class="container">
+    <div class="test-container">
         <div class="navigation-buttons top-nav">
-            <a href="../levels/level2.html" class="nav-button back-button">Volver al Nivel 2</a>
-            <a href="../index.html" class="nav-button back-button">Volver al Inicio</a>
+            <a href="level2.html" class="nav-button back-button">Volver al Nivel 2</a>
+            <a href="index.html" class="nav-button back-button">Volver al Inicio</a>
         </div>
 
-        <p>Responde las siguientes preguntas para completar este nivel:</p>
-        <form id="testForm">
+        <div class="test-intro">
+            <p>Responde las siguientes preguntas para completar este nivel:</p>
+        </div>
+
+        <form id="testForm" class="test-form">
             <div class="question">
-                <p class="question-number">1. ¿Qué es el Presupuesto Cero (Zero-Based Budgeting)?</p>
-                <label><input type="radio" name="q1" value="correct"> Un método donde cada euro tiene un destino específico y el total debe ser cero.</label><br>
-                <label><input type="radio" name="q1" value="wrong"> Un presupuesto donde no gastas nada.</label><br>
+                <p class="question-number">1. ¿Qué es un presupuesto?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="correct">
+                        <span>Un plan para gestionar tus ingresos y gastos</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="wrong">
+                        <span>Una lista de deseos de compra</span>
+                    </label>
+                </div>
             </div>
 
             <div class="question">
-                <p class="question-number">2. ¿En qué consiste el Método del Sobre?</p>
-                <label><input type="radio" name="q2" value="correct"> Asignar dinero en categorías específicas usando sobres físicos o virtuales.</label><br>
-                <label><input type="radio" name="q2" value="wrong"> Guardar todo tu dinero en sobres.</label><br>
+                <p class="question-number">2. ¿Qué es un activo?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="correct">
+                        <span>Algo que posee valor y puede generar ingresos</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="wrong">
+                        <span>Algo que solo genera gastos</span>
+                    </label>
+                </div>
             </div>
 
             <div class="question">
-                <p class="question-number">3. ¿Qué es la Regla de las 24-48 Horas?</p>
-                <label><input type="radio" name="q3" value="correct"> Esperar ese tiempo antes de hacer una compra no esencial para evaluar si realmente la necesitas.</label><br>
-                <label><input type="radio" name="q3" value="wrong"> El tiempo máximo para devolver una compra.</label><br>
+                <p class="question-number">3. ¿Qué es un pasivo?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="correct">
+                        <span>Una deuda o compromiso financiero</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="wrong">
+                        <span>Un ingreso inesperado</span>
+                    </label>
+                </div>
             </div>
 
             <div class="question">
-                <p class="question-number">4. ¿Qué son los "gastos hormiga"?</p>
-                <label><input type="radio" name="q4" value="correct"> Pequeños gastos diarios que sumados representan una cantidad significativa.</label><br>
-                <label><input type="radio" name="q4" value="wrong"> Gastos relacionados con mascotas.</label><br>
+                <p class="question-number">4. ¿Qué es el ahorro?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="correct">
+                        <span>La parte del ingreso que no se gasta</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="wrong">
+                        <span>Gastar todo el ingreso</span>
+                    </label>
+                </div>
             </div>
 
             <div class="question">
-                <p class="question-number">5. ¿Qué hacer si te pasas del presupuesto en una categoría?</p>
+                <p class="question-number">5. ¿Qué es una inversión?</p>
                 <div class="options">
                     <label class="option">
                         <input type="radio" name="q5" value="correct">
-                        <span>Usar la regla 80/20 y compensar recortando en otra categoría.</span>
+                        <span>Colocar dinero en un activo esperando obtener ganancias</span>
                     </label>
                     <label class="option">
                         <input type="radio" name="q5" value="wrong">
-                        <span>Pedir un préstamo para cubrirlo.</span>
+                        <span>Gastar dinero en bienes de consumo</span>
                     </label>
                 </div>
             </div>
@@ -159,24 +213,6 @@
     </div>
 
     <script>
-        // Función para mezclar las preguntas
-        function shuffleQuestions() {
-            const form = document.getElementById('testForm');
-            const questions = Array.from(form.getElementsByClassName('question'));
-            const shuffled = questions.sort(() => Math.random() - 0.5);
-            shuffled.forEach(question => form.appendChild(question));
-
-            // Actualiza los números de las preguntas
-            const questionNumbers = form.getElementsByClassName('question-number');
-            Array.from(questionNumbers).forEach((element, index) => {
-                element.textContent = `${index + 1}. ${element.textContent.split('. ')[1]}`;
-            });
-        }
-
-        // Llama a la función para mezclar las preguntas al cargar la página
-        window.onload = shuffleQuestions;
-
-        // Función para enviar el test
         function submitTest() {
             const answers = document.querySelectorAll('input[type="radio"]:checked');
             if (answers.length < 5) {
@@ -193,23 +229,15 @@
 
             const resultMessage = document.getElementById('resultMessage');
             resultMessage.className = `result-message ${score === 5 ? 'success' : 'error'}`;
-            
-            if (score === 5) {
-                resultMessage.textContent = '¡Felicidades! Has aprobado el Nivel 2.';
-                unlockNextLevel(3);
-                setTimeout(() => {
-                    window.location.href = "../levels/level3.html";
-                }, 2000);
-            } else {
-                resultMessage.textContent = `No has aprobado. Tu puntuación es ${score}/5. Revisa el contenido y vuelve a intentarlo.`;
-            }
-            
-            resultMessage.scrollIntoView({ behavior: 'smooth' });
-        }
+            resultMessage.textContent = score === 5 
+                ? '¡Felicitaciones! Has completado el Nivel 2 exitosamente.' 
+                : `Has obtenido ${score}/5. Revisa el material y vuelve a intentarlo.`;
 
-        // Función para desbloquear el siguiente nivel
-        function unlockNextLevel(level) {
-            localStorage.setItem(`level${level}`, 'unlocked');
+            if (score === 5) {
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 3000);
+            }
         }
     </script>
 </body>
