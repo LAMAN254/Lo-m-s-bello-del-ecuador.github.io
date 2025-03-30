@@ -5,16 +5,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Nivel 1: Introducción a las Finanzas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="test1.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .test-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .nav-button {
+            text-decoration: none;
+            color: #007BFF;
+            border: 1px solid #007BFF;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .test-intro {
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .options {
+            margin-left: 1rem;
+        }
+
+        .option {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .submit-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        .result-message {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .result-message.success {
+            color: #28a745;
+        }
+
+        .result-message.error {
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Test Nivel 1: Introducción a las Finanzas</h1>
     </header>
-    <div class="container">
+    <div class="test-container">
         <div class="navigation-buttons top-nav">
-            <a href="../levels/level1.html" class="nav-button back-button">Volver al Nivel 1</a>
-            <a href="../index.html" class="nav-button back-button">Volver al Inicio</a>
+            <a href="level1.html" class="nav-button back-button">Volver al Nivel 1</a>
+            <a href="index.html" class="nav-button back-button">Volver al Inicio</a>
         </div>
 
         <div class="test-intro">
@@ -23,71 +135,71 @@
 
         <form id="testForm" class="test-form">
             <div class="question">
-                <p class="question-number">1. ¿Qué son las finanzas personales?</p>
+                <p class="question-number">1. ¿Qué es el dinero?</p>
                 <div class="options">
                     <label class="option">
                         <input type="radio" name="q1" value="correct">
-                        <span>La gestión de ingresos y gastos personales.</span>
+                        <span>Un medio de intercambio aceptado por la sociedad</span>
                     </label>
                     <label class="option">
                         <input type="radio" name="q1" value="wrong">
-                        <span>La economía global.</span>
+                        <span>Un recurso ilimitado</span>
                     </label>
                 </div>
             </div>
 
             <div class="question">
-                <p class="question-number">2. ¿Cuál es la regla 50-30-20?</p>
+                <p class="question-number">2. ¿Qué es un ingreso?</p>
                 <div class="options">
                     <label class="option">
                         <input type="radio" name="q2" value="correct">
-                        <span>50% necesidades, 30% gustos, 20% ahorro/inversión.</span>
+                        <span>El dinero que recibes por tu trabajo o inversiones</span>
                     </label>
                     <label class="option">
                         <input type="radio" name="q2" value="wrong">
-                        <span>50% ahorro, 30% gustos, 20% necesidades.</span>
+                        <span>El dinero que gastas en compras</span>
                     </label>
                 </div>
             </div>
 
             <div class="question">
-                <p class="question-number">3. ¿Qué es un fondo de emergencia?</p>
+                <p class="question-number">3. ¿Qué es un gasto?</p>
                 <div class="options">
                     <label class="option">
                         <input type="radio" name="q3" value="correct">
-                        <span>Un ahorro para cubrir 3-6 meses de gastos básicos.</span>
+                        <span>El dinero que usas para pagar bienes y servicios</span>
                     </label>
                     <label class="option">
                         <input type="radio" name="q3" value="wrong">
-                        <span>Un préstamo para emergencias.</span>
+                        <span>El dinero que ahorras</span>
                     </label>
                 </div>
             </div>
 
             <div class="question">
-                <p class="question-number">4. ¿Por qué es importante ahorrar desde temprano?</p>
+                <p class="question-number">4. ¿Qué es el ahorro?</p>
                 <div class="options">
                     <label class="option">
                         <input type="radio" name="q4" value="correct">
-                        <span>Porque el interés compuesto multiplica el dinero con el tiempo.</span>
+                        <span>La parte del ingreso que no se gasta</span>
                     </label>
                     <label class="option">
                         <input type="radio" name="q4" value="wrong">
-                        <span>Porque es obligatorio por ley.</span>
+                        <span>Gastar todo el ingreso</span>
                     </label>
                 </div>
             </div>
 
             <div class="question">
-                <p class="question-number">5. ¿Qué herramienta digital puede ayudarte a controlar tus gastos?</p>
+                <p class="question-number">5. ¿Qué es una inversión?</p>
                 <div class="options">
                     <label class="option">
                         <input type="radio" name="q5" value="correct">
-                        <span>Apps como Moni o Fintonic.</span>
+                        <span>Colocar dinero en un activo esperando obtener ganancias</span>
                     </label>
                     <label class="option">
                         <input type="radio" name="q5" value="wrong">
-                        <span>Redes sociales.</span>
+                        <span>Gastar dinero en bienes de consumo</span>
                     </label>
                 </div>
             </div>
@@ -101,24 +213,6 @@
     </div>
 
     <script>
-        // Función para mezclar las preguntas
-        function shuffleQuestions() {
-            const form = document.getElementById('testForm');
-            const questions = Array.from(form.getElementsByClassName('question'));
-            const shuffled = questions.sort(() => Math.random() - 0.5); // Mezcla aleatoria
-            shuffled.forEach(question => form.appendChild(question)); // Reorganiza las preguntas
-
-            // Actualiza los números de las preguntas
-            const questionNumbers = form.getElementsByClassName('question-number');
-            Array.from(questionNumbers).forEach((element, index) => {
-                element.textContent = `${index + 1}. ${element.textContent.split('. ')[1]}`;
-            });
-        }
-
-        // Llama a la función para mezclar las preguntas al cargar la página
-        window.onload = shuffleQuestions;
-
-        // Función para enviar el test
         function submitTest() {
             const answers = document.querySelectorAll('input[type="radio"]:checked');
             if (answers.length < 5) {
@@ -135,24 +229,15 @@
 
             const resultMessage = document.getElementById('resultMessage');
             resultMessage.className = `result-message ${score === 5 ? 'success' : 'error'}`;
-            
-            if (score === 5) {
-                resultMessage.textContent = '¡Felicidades! Has aprobado el Nivel 1.';
-                unlockNextLevel(2);
-                setTimeout(() => {
-                    window.location.href = "../levels/level2.html";
-                }, 2000);
-            } else {
-                resultMessage.textContent = `No has aprobado. Tu puntuación es ${score}/5. Revisa el contenido y vuelve a intentarlo.`;
-            }
-            
-            // Scroll to result message
-            resultMessage.scrollIntoView({ behavior: 'smooth' });
-        }
+            resultMessage.textContent = score === 5 
+                ? '¡Felicitaciones! Has completado el Nivel 1 exitosamente.' 
+                : `Has obtenido ${score}/5. Revisa el material y vuelve a intentarlo.`;
 
-        // Función para desbloquear el siguiente nivel
-        function unlockNextLevel(level) {
-            localStorage.setItem(`level${level}`, 'unlocked'); // Guarda el estado del nivel como desbloqueado
+            if (score === 5) {
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 3000);
+            }
         }
     </script>
 </body>
